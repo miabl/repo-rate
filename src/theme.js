@@ -1,3 +1,5 @@
+import { Platform } from "react-native-web";
+
 const theme = {
   colors: {
     textPrimary: '#24292e',
@@ -6,7 +8,8 @@ const theme = {
     top: '#ffffff',
     appBarBackground: '#24292e',
     mainBackground: '#e1e4e8',
-    cardBackground: '#fff'
+    cardBackground: '#fff',
+    error: '#d73a4a'
   },
   fontSizes: {
     body: 14,
@@ -14,7 +17,11 @@ const theme = {
     heading: 20
   },
   fonts: {
-    main: 'System',
+    main: Platform.select({
+      android: 'Roboto',
+      ios: 'Arial',
+      default: 'System',
+    })
   },
   fontWeights: {
     normal: '400',
