@@ -3,7 +3,9 @@ import Text from '../Text'
 import { Formik } from 'formik'
 import FormikTextInput from './FormikTextInput'
 import theme from '../../theme'
+import useSignIn from '../../hooks/useSignIn'
 import * as yup from 'yup'
+
 
 const styles = StyleSheet.create({
   component: {
@@ -43,9 +45,16 @@ const SignInForm = ({onSubmit}) => {
 }
 
 const SignIn = () => {
-  onSubmit = values => {
-    console.log(values.username)
-    console.log(values.password)
+  const [signIn] = useSignIn()
+
+  const onSubmit = async values => {
+    const { username, password } = values;
+
+    try {
+      await signIn({ username, password })
+    } catch (e) {
+      console.log(e)
+    }
   }
 
   return (
