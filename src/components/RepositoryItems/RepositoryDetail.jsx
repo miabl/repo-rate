@@ -34,11 +34,10 @@ const styles = StyleSheet.create({
 
 const RepositoryDetail = () => {
   const { id } = useParams()
-  const item = useRepository(id)
-  console.log("item:", item)
-  if (item == undefined) return
+  const { data, loading } = useRepository(id)
+  if (loading) return <View style={styles.card} testID="repositoryItem"></View>
 
-  const repository = item.data.repository
+  const repository = data.repository
 
   return (
     <View style={styles.card} testID="repositoryItem">
