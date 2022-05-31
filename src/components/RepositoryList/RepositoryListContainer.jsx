@@ -1,5 +1,7 @@
+import React from "react"
 import { FlatList, View, StyleSheet } from "react-native"
-import RepositoryItem from "./RepositoryItems/RepositoryItem"
+import RepositoryItem from "../RepositoryItems/RepositoryItem"
+import RepositoryListHeader from "./RepositoryListHeader"
 const styles = StyleSheet.create({
   separator: {
     height: 10,
@@ -12,19 +14,34 @@ const renderRepository = ({ item }) => {
   return <RepositoryItem item={item} />
 }
 
-export const RepositoryListContainer = ({ repositories }) => {
-  const repositoryNodes = repositories
-    ? repositories.edges.map((edge) => edge.node)
-    : []
+export class RepositoryListContainer extends React.Component {
+  renderHeader = () => {
+    const { order, setOrder, searchKeyword, setSearchKeyword } = this.props
 
-  return (
-    <FlatList
-      data={repositoryNodes}
-      renderItem={renderRepository}
-      ItemSeparatorComponent={ItemSeparator}
-      keyExtractor={(item) => item.id}
-    />
-  )
+    return (
+      <RepositoryListHeader
+        order={order}
+        setOrder={setOrder}
+        searchKeyword={searchKeyword}
+        setSearchKeyword={setSearchKeyword}
+      />
+    )
+  }
+
+  render() {
+    const { repositoryNodes } = this.props
+
+    return (
+      <FlatList
+        data={repositoryNodes}
+        ListHeaderComponent={this.renderHeader}
+        ListHeaderComponentStyle={{ zIndex: 10 }}
+        renderItem={renderRepository}
+        ItemSeparatorComponent={ItemSeparator}
+        keyExtractor={(item) => item.id}
+      />
+    )
+  }
 }
 
 export default RepositoryListContainer

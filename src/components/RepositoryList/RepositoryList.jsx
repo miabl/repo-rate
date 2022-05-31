@@ -1,8 +1,9 @@
 import { FlatList, View, StyleSheet } from "react-native"
 import RepositoryItem from "../RepositoryItems/RepositoryItem"
 import useRepositories from "../../hooks/useRepositories"
-import OrderRepositories from "./OrderRepositories"
-import { useState, useEffect } from "react"
+import RepositoryListHeader from "./RepositoryListHeader"
+import RepositoryListContainer from "./RepositoryListContainer"
+import { useState } from "react"
 
 const styles = StyleSheet.create({
   separator: {
@@ -21,6 +22,7 @@ const RepositoryList = () => {
   let orderDirection = null
 
   const [order, setOrder] = useState("Latest repositories")
+  const [searchKeyword, setSearchKeyword] = useState("")
 
   switch (order) {
     case "Latest repositories":
@@ -36,22 +38,23 @@ const RepositoryList = () => {
       orderDirection = "ASC"
   }
 
-  const { repositories } = useRepositories({ orderBy, orderDirection })
+  const { repositories } = useRepositories({
+    orderBy,
+    orderDirection,
+    searchKeyword,
+  })
 
   let repositoryNodes = repositories
     ? repositories.edges.map((edge) => edge.node)
     : []
 
   return (
-    <FlatList
-      data={repositoryNodes}
-      ListHeaderComponent={() => (
-        <OrderRepositories order={order} setOrder={setOrder} />
-      )}
-      ListHeaderComponentStyle={{ zIndex: 10 }}
-      renderItem={renderRepository}
-      ItemSeparatorComponent={ItemSeparator}
-      keyExtractor={(item) => item.id}
+    <RepositoryListContainer
+      repositoryNodes={repositoryNodes}
+      order={order}
+      setOrder={setOrder}
+      searchKeyword={searchKeyword}
+      setSearchKeyword={setSearchKeyword}
     />
   )
 }

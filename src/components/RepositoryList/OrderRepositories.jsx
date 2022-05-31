@@ -2,7 +2,6 @@ import { useState } from "react"
 import { View, StyleSheet, Pressable } from "react-native"
 import { Menu, Provider, List } from "react-native-paper"
 import theme from "../../theme"
-import Text from "../Text"
 
 const OrderRepositories = ({ order, setOrder }) => {
   const styles = StyleSheet.create({
