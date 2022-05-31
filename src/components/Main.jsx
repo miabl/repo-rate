@@ -1,13 +1,14 @@
 import { StyleSheet, View } from "react-native"
 import { Route, Routes, Navigate } from "react-router-native"
 
-import RepositoryList from "./RepositoryList"
+import RepositoryList from "./RepositoryList/RepositoryList"
 import RepositoryDetail from "./RepositoryDetail/RepositoryDetail"
 import SignIn from "./SigninForm/SignIn"
 import SignUp from "./SignupForm/SignUp"
 import AppBar from "./AppBar/AppBar"
 import theme from "../theme"
 import SubmitReview from "./ReviewForm/SubmitReview"
+import { StatusBar } from "expo-status-bar"
 
 const styles = StyleSheet.create({
   container: {
@@ -29,6 +30,7 @@ const Main = () => {
         <Route path="/submitreview" element={<SubmitReview />} exact />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
+      <StatusBar style="light" />
     </View>
   )
 }
