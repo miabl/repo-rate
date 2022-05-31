@@ -3,9 +3,7 @@ import Text from "../Text"
 import { Formik } from "formik"
 import FormikTextInput from "./FormikTextInput"
 import theme from "../../theme"
-import useSignIn from "../../hooks/useSignIn"
 import * as yup from "yup"
-import { useNavigate } from "react-router-native"
 
 const styles = StyleSheet.create({
   component: {
