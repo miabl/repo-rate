@@ -1,6 +1,6 @@
-import { Text as NativeText, StyleSheet } from 'react-native';
+import { Text as NativeText, StyleSheet } from "react-native"
 
-import theme from '../theme';
+import theme from "../theme"
 
 const styles = StyleSheet.create({
   text: {
@@ -27,21 +27,21 @@ const styles = StyleSheet.create({
   fontWeightBold: {
     fontWeight: theme.fontWeights.bold,
   },
-});
+})
 
 const Text = ({ color, fontSize, fontWeight, style, ...props }) => {
   const textStyle = [
     styles.text,
-    color === 'textSecondary' && styles.colorTextSecondary,
-    color === 'primary' && styles.colorPrimary,
-    color === 'top' && styles.colorTop,
-    fontSize === 'subheading' && styles.fontSizeSubheading,
-    fontSize === 'heading' && styles.fontSizeSubheading,
-    fontWeight === 'bold' && styles.fontWeightBold,
+    color === "textSecondary" && styles.colorTextSecondary,
+    color === "primary" && styles.colorPrimary,
+    color === "top" && styles.colorTop,
+    fontSize === "subheading" && styles.fontSizeSubheading,
+    fontSize === "heading" && styles.fontSizeSubheading,
+    fontWeight === "bold" && styles.fontWeightBold,
     style,
-  ];
+  ]
 
-  return <NativeText style={textStyle} {...props} />;
-};
+  return <NativeText style={textStyle} {...props} />
+}
 
-export default Text;
+export default Text

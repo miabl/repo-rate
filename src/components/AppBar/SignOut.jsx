@@ -1,5 +1,5 @@
-import { View, StyleSheet } from "react-native"
-import { TouchableHighlight } from "react-native"
+import { View, StyleSheet, TouchableHighlight } from "react-native"
+import { useNavigate } from "react-router-native"
 import Text from "../Text"
 import theme from "../../theme"
 import useAuthStorage from "../../hooks/useAuthStorage"
@@ -21,10 +21,12 @@ const style = StyleSheet.create({
 const SignOut = () => {
   const apolloClient = useApolloClient()
   const authStorage = useAuthStorage()
+  const navigate = useNavigate()
 
   const handleSignOut = async () => {
     await authStorage.removeAccessToken()
     apolloClient.resetStore()
+    navigate("/")
   }
 
   return (

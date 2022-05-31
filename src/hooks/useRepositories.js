@@ -7,8 +7,6 @@ const useRepositories = () => {
   })
   if (error) console.log("error!", error)
 
-  console.log(data)
-
   return { repositories: data ? data.repositories : undefined, loading }
 }
 
