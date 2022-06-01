@@ -34,20 +34,32 @@ const styles = StyleSheet.create({
 
 const ItemSeparator = () => <View style={styles.separator} />
 
+const renderReview = ({ item }) => {
+  return <ReviewItem review={item} />
+}
+
 const RepositoryDetail = () => {
   const { repositoryId } = useParams()
-  const { data, loading } = useRepository(repositoryId)
+  const { repository, fetchMore, loading } = useRepository({
+    first: 5,
+    id: repositoryId,
+  })
   if (loading) return <View style={styles.card} testID="repositoryItem"></View>
 
-  const repository = data.repository
-  const reviews = data.repository.reviews.edges
+  const reviews = repository.reviews.edges
+
+  const onEndReach = () => {
+    fetchMore()
+  }
 
   return (
     <FlatList
       data={reviews}
-      renderItem={({ item }) => <ReviewItem item={item} />}
+      renderItem={renderReview}
       keyExtractor={(item) => item.node.id}
       ItemSeparatorComponent={ItemSeparator}
+      onEndReached={onEndReach}
+      onEndReachedThreshold={0.5}
       ListHeaderComponent={() => <RepositoryInfo repository={repository} />}
     />
   )

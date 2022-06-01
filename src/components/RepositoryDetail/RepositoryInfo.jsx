@@ -34,6 +34,7 @@ const styles = StyleSheet.create({
 })
 
 const RepositoryInfo = ({ repository }) => {
+  if (repository == undefined) return <View></View>
   return (
     <View>
       <View style={styles.card} testID="repositoryItem">

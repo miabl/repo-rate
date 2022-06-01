@@ -29,7 +29,7 @@ export class RepositoryListContainer extends React.Component {
   }
 
   render() {
-    const { repositoryNodes } = this.props
+    const { repositoryNodes, onEndReach } = this.props
 
     return (
       <FlatList
@@ -39,6 +39,8 @@ export class RepositoryListContainer extends React.Component {
         renderItem={renderRepository}
         ItemSeparatorComponent={ItemSeparator}
         keyExtractor={(item) => item.id}
+        onEndReached={onEndReach}
+        onEndReachedThreshold={0.5}
       />
     )
   }

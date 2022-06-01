@@ -68,7 +68,6 @@ const SubmitReview = () => {
   const onSubmit = async (values) => {
     try {
       const data = await createReview(values)
-      console.log(data)
       navigate(`/${data.createReview.repositoryId}`)
     } catch (e) {
       console.log(e)

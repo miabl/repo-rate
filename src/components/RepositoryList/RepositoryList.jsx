@@ -1,21 +1,6 @@
-import { FlatList, View, StyleSheet } from "react-native"
-import RepositoryItem from "../RepositoryItems/RepositoryItem"
 import useRepositories from "../../hooks/useRepositories"
-import RepositoryListHeader from "./RepositoryListHeader"
 import RepositoryListContainer from "./RepositoryListContainer"
 import { useState } from "react"
-
-const styles = StyleSheet.create({
-  separator: {
-    height: 10,
-  },
-})
-
-const ItemSeparator = () => <View style={styles.separator} />
-
-const renderRepository = ({ item }) => {
-  return <RepositoryItem item={item} />
-}
 
 const RepositoryList = () => {
   let orderBy = null
@@ -38,7 +23,8 @@ const RepositoryList = () => {
       orderDirection = "ASC"
   }
 
-  const { repositories } = useRepositories({
+  const { repositories, fetchMore } = useRepositories({
+    first: 8,
     orderBy,
     orderDirection,
     searchKeyword,
@@ -48,6 +34,10 @@ const RepositoryList = () => {
     ? repositories.edges.map((edge) => edge.node)
     : []
 
+  const onEndReach = () => {
+    fetchMore()
+  }
+
   return (
     <RepositoryListContainer
       repositoryNodes={repositoryNodes}
@@ -55,6 +45,7 @@ const RepositoryList = () => {
       setOrder={setOrder}
       searchKeyword={searchKeyword}
       setSearchKeyword={setSearchKeyword}
+      onEndReach={onEndReach}
     />
   )
 }

@@ -1,7 +1,7 @@
 import { View, StyleSheet, Dimensions } from "react-native"
 import Text from "../Text"
 import theme from "../../theme"
-import { format, toDate, parseISO } from "date-fns"
+import { format, parseISO } from "date-fns"
 const styles = StyleSheet.create({
   card: {
     padding: 10,
@@ -45,25 +45,24 @@ const formatDate = (date) => {
   return "formatDate", format(parseISO(date), "dd.MM.yy")
 }
 
-const ReviewItem = ({ item }) => {
-  let review = item.node
-  formatDate(review.createdAt)
+const ReviewItem = ({ review }) => {
+  formatDate(review.node.createdAt)
   return (
     <View style={styles.card}>
       <View style={styles.mainSection}>
         <View style={styles.circle}>
           <Text fontWeight="bold" fontSize="heading" color="primary">
-            {review.rating}
+            {review.node.rating}
           </Text>
         </View>
         <View>
           <Text fontSize="heading" fontWeight="bold">
-            {review.user.username}
+            {review.node.user.username}
           </Text>
           <Text color="textSecondary" style={styles.dateSection}>
-            {formatDate(review.createdAt)}
+            {formatDate(review.node.createdAt)}
           </Text>
-          <Text style={styles.textSection}>{review.text}</Text>
+          <Text style={styles.textSection}>{review.node.text}</Text>
         </View>
       </View>
     </View>

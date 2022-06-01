@@ -33,7 +33,7 @@ const SignOut = () => {
     <View style={style.menuItem}>
       <TouchableHighlight onPress={handleSignOut} style={style.link}>
         <Text color="top" fontWeight="bold">
-          Sign Out
+          Sign out
         </Text>
       </TouchableHighlight>
     </View>
